@@ -185,8 +185,8 @@ extension BoardCommentViewController {
                             self.isInfiniteScroll = !data.data.last
                         }
                     } else {
-                                            print("Failed to decode the response.")
-                                        }
+                        print("Failed to decode the response.")
+                    }
                 case .requestErr(let message):
                     print("Request error: \(message)")
                 case .pathErr:

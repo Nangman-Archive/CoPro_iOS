@@ -43,7 +43,8 @@ struct ContentElement: Codable {
 
 // MARK: - Writer
 struct Writer: Codable {
-    let nickName, occupation: String
+    let nickName: String
+    let occupation: String?
 }
 
 struct EditCommentDTO: Codable {
