@@ -11,7 +11,7 @@ import Foundation
 class LikeProfileDTO: Codable {
     let statusCode: Int
     let message: String
-    let data: LikeProfileDataClass
+    let data: LikeProfileDataClass?
     
     init(statusCode: Int, message: String, data: LikeProfileDataClass) {
         self.statusCode = statusCode
@@ -25,7 +25,7 @@ class LikeProfileDataClass: Codable {
     let totalPages, totalElements: Int
     let pageable: LikeProfilePageable
     let size: Int
-    let content: [LikeProfileContent]
+    let content: [LikeProfileContent]?
     let number: Int
     let sort: Sort
     let numberOfElements: Int
@@ -49,7 +49,8 @@ class LikeProfileDataClass: Codable {
 // MARK: - Content
 class LikeProfileContent: Codable {
     let memberLikeID: Int
-    let name, email, picture, occupation: String
+    let name, picture: String
+    let email, occupation: String?
     let language: String
     let career: Int
     let gitHubURL: String?
