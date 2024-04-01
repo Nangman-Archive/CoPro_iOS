@@ -521,7 +521,7 @@ func getTopMostViewController() -> UIViewController? {
                         if let validImageId = data.data.imageId {
                             self.imageId = validImageId
                         }
-                        let mappedItem = DetailBoardDataModel(boardId: data.data.boardId, title: data.data.title, createAt: data.data.createAt, category: data.data.category ?? "nil", contents: data.data.contents ?? "nil" , tag: data.data.tag ?? nil, count: data.data.count, heart: data.data.heart, imageUrl: data.data.imageUrl, nickName: data.data.nickName ?? "nil", occupation: data.data.occupation ?? "nil", isHeart: data.data.isHeart, isScrap: data.data.isScrap, commentCount: data.data.commentCount, part: data.data.part ?? "nil", email: data.data.email ?? "" , picture: data.data.picture ?? "")
+                        let mappedItem = DetailBoardDataModel(boardId: data.data.boardId, title: data.data.title, createAt: data.data.createAt, category: data.data.category ?? "", contents: data.data.contents ?? "" , tag: data.data.tag ?? "", count: data.data.count, heart: data.data.heart, imageUrl: data.data.imageUrl, nickName: data.data.nickName ?? "", occupation: data.data.occupation ?? "", isHeart: data.data.isHeart, isScrap: data.data.isScrap, commentCount: data.data.commentCount, part: data.data.part ?? "", email: data.data.email ?? "" , picture: data.data.picture ?? "")
                         self.isHeart = data.data.isHeart
                         self.isScrap = data.data.isScrap
                         self.imageUrl = data.data.imageUrl ?? []
