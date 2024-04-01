@@ -111,9 +111,8 @@ class LikeProfileViewController:UIViewController, UICollectionViewDataSource, UI
             switch result {
             case .success(let likeProfileDto):
                 DispatchQueue.main.async {
-                   guard let data = likeProfileDto.data?.content else {return}
-                    self?.contents.append(contentsOf: data)
-                   self?.last = ((likeProfileDto.data?.last) != nil)
+                    self?.contents.append(contentsOf: likeProfileDto.data.content)
+                   self?.last = likeProfileDto.data.last
                     
                     self?.collectionView.reloadData()
                     if self?.contents.count == 0 {
@@ -147,7 +146,7 @@ class LikeProfileViewController:UIViewController, UICollectionViewDataSource, UI
                         self?.collectionView.backgroundView = nil
                     }
                     print("After reloadData")
-//                    print("API Success: \(likeProfileDto.data.content.count)")
+                    print("API Success: \(likeProfileDto.data.content.count)")
                     print("APIDATA : \(String(describing: self?.contents))")
                 }
                 
