@@ -432,8 +432,13 @@ final class DetailBoardViewController: BaseViewController, UIGestureRecognizerDe
         self.navigationItem.rightBarButtonItem = rightButton
     }
     @objc func rightButtonTapped() {
-    let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
+        var alertController: UIAlertController
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        } else {
+            alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        }
+        
         let action1 = UIAlertAction(title: "신고", style: .destructive) { _ in
             guard let boardId = self.postId else { return }
             let bottomSheetVC = ReportBottomSheetViewController()
