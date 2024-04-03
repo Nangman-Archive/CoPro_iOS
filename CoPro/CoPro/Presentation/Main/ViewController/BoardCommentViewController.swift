@@ -431,7 +431,12 @@ extension BoardCommentViewController {
 extension BoardCommentViewController: CustomCellDelegate {
     func menuButtonTapped(commentId: Int, commentContent: String) {
         self.commentId = commentId
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        var alert: UIAlertController
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        } else {
+            alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        }
 
             let action1 = UIAlertAction(title: "수정", style: .default) { _ in
                 let editCommentVC = editCommentViewController()
@@ -447,17 +452,10 @@ extension BoardCommentViewController: CustomCellDelegate {
             }
             let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
 
-            alertController.addAction(action1)
-            alertController.addAction(action2)
-            alertController.addAction(cancelAction)
-
-//            // iPad에서는 popover로 표시되어야 하므로 popover의 sourceView와 sourceRect를 설정해야 합니다.
-//            if let popoverController = alertController.popoverPresentationController {
-//                popoverController.sourceView = sender
-//                popoverController.sourceRect = sender.bounds
-//            }
-
-        getTopMostViewController()?.present(alertController, animated: true, completion: nil)
+        alert.addAction(action1)
+        alert.addAction(action2)
+        alert.addAction(cancelAction)
+        getTopMostViewController()?.present(alert, animated: true, completion: nil)
     }
     func getTopMostViewController() -> UIViewController? {
         var topMostViewController = UIApplication.shared.keyWindow?.rootViewController
