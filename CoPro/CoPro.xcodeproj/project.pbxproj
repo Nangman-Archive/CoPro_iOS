@@ -1898,8 +1898,8 @@
 				GITHUB_CLIENT_ID = e0abaf8660ab93c1bfe3;
 				INFOPLIST_FILE = CoPro/Application/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라에 접근 가능하도록 허용 버튼을 눌러주세요.";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "접근을 허용하시겠습니까?";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "게시글 등록, 프로필 사진 수정을 위해 권한이 필요합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "게시글 등록, 프로필 사진 수정을 위해 권한이 필요합니다. 허용 안함 시 일부 기능이 동작하지 않을 수 있습니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "게시글 등록, 프로필 사진 수정을 위해 권한이 필요합니다. 허용 안함 시 일부 기능이 동작하지 않을 수 있습니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1932,8 +1932,8 @@
 				GITHUB_CLIENT_ID = e0abaf8660ab93c1bfe3;
 				INFOPLIST_FILE = CoPro/Application/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라에 접근 가능하도록 허용 버튼을 눌러주세요.";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "접근을 허용하시겠습니까?";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "게시글 등록, 프로필 사진 수정을 위해 권한이 필요합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "게시글 등록, 프로필 사진 수정을 위해 권한이 필요합니다. 허용 안함 시 일부 기능이 동작하지 않을 수 있습니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "게시글 등록, 프로필 사진 수정을 위해 권한이 필요합니다. 허용 안함 시 일부 기능이 동작하지 않을 수 있습니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

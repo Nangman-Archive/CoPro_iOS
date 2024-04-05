@@ -443,6 +443,7 @@ final class DetailBoardViewController: BaseViewController, UIGestureRecognizerDe
             guard let boardId = self.postId else { return }
             let bottomSheetVC = ReportBottomSheetViewController()
             bottomSheetVC.postId = boardId
+            bottomSheetVC.delegate = self
             self.getTopMostViewController()?.present(bottomSheetVC, animated: true, completion: nil)
         }
         let action2 = UIAlertAction(title: "수정", style: .default) { _ in
@@ -1028,6 +1029,15 @@ extension DetailBoardViewController: editPostViewControllerDelegate {
                     break
                 }
             }
+        }
+    }
+}
+
+extension DetailBoardViewController: ReportDelegate {
+    func didTapConfirmButton() {
+        print("confirmButtonTapped")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.showAlert(title: nil, message: "감사합니다. 신고가 접수되었습니다. 24시간 이내 검토하고 이용규칙을 위반한 것으로 확인되면 콘텐츠가 삭제됩니다.", confirmButtonName: "확인" )
         }
     }
 }
