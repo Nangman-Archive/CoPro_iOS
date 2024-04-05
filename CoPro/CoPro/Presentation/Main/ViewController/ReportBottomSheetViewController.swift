@@ -12,6 +12,9 @@ import SnapKit
 import Then
 import KeychainSwift
 
+protocol ReportDelegate: AnyObject {
+    func didTapConfirmButton()
+}
 final class ReportBottomSheetViewController: UIViewController {
 
     // MARK: - UI Components
@@ -24,6 +27,7 @@ final class ReportBottomSheetViewController: UIViewController {
     let textViewPlaceHolder = "신고내용을 입력해주세요"
     private let remainCountLabel = UILabel()
     private let keychain = KeychainSwift()
+    weak var delegate: ReportDelegate?
 
     // MARK: - Properties
                     
@@ -125,6 +129,7 @@ extension ReportBottomSheetViewController {
             BoardAPI.shared.reportBoard(token: token, boardId: boardId, contents: contents) { result in
                 switch result {
                 case .success:
+                    self.delegate?.didTapConfirmButton()
                     self.dismiss(animated: true, completion: nil)
                 case .requestErr(let message):
                     print("Request error: \(message)")
