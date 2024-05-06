@@ -58,7 +58,8 @@ final class DetailBoardViewController: BaseViewController, UIGestureRecognizerDe
     private let tagStackView = UIStackView()
     private let chatButton = UIButton()
     private let contentStackView = UIStackView()
-    private var isMyPost: Bool = false
+    private var isMyPost = false
+    private var noUser = false
     private var category: String?
     private var imageUrl = [String]()
     private var imageId = [Int]()
@@ -453,11 +454,22 @@ final class DetailBoardViewController: BaseViewController, UIGestureRecognizerDe
             self.presentDeleteConfirmationAlert()
         }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        let action4 = UIAlertAction(title: "차단", style: .default) { _ in
+            self.presentblockConfirmationAlert()
+        }
 
-        alertController.addAction(action1)
         if self.isMyPost {
             alertController.addAction(action2)
             alertController.addAction(action3)
+        }
+        else {
+            if self.noUser {
+                alertController.addAction(action1)
+            }
+            else {
+                alertController.addAction(action1)
+                alertController.addAction(action4)
+            }
         }
         alertController.addAction(cancelAction)
 
@@ -480,6 +492,20 @@ func getTopMostViewController() -> UIViewController? {
             guard let postId = self.postId else { return }
             print("\(postId)")
             self.deletePost(boardId: postId)
+        }
+        alertController.addAction(deleteAction)
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func presentblockConfirmationAlert() {
+        let alertController = UIAlertController(title: nil, message: "차단하시겠습니까?", preferredStyle: .alert)
+        
+        let deleteAction = UIAlertAction(title: "차단", style: .destructive) { _ in
+            self.addBlock(nickname: self.nicknameLabel.text ?? "")
         }
         alertController.addAction(deleteAction)
         
@@ -532,6 +558,7 @@ func getTopMostViewController() -> UIViewController? {
                         self.isScrap = data.data.isScrap
                         self.imageUrl = data.data.imageUrl ?? []
                         self.isMyPost = data.data.email == self.keychain.get("currentUserEmail")
+                        self.noUser = data.data.email == nil
                         self.markdownView.load(markdown: data.data.contents ?? "")
                         if self.isMyPost {
                             self.chatButton.isHidden = true
@@ -698,6 +725,33 @@ func getTopMostViewController() -> UIViewController? {
         if let token = self.keychain.get("accessToken") {
             print("\(token)")
             BoardAPI.shared.deleteBoard(token: token, boardId: boardId) { result in
+                switch result {
+                case .success:
+                    print("delete success")
+                    self.delegate?.didDeletePost()
+                    self.navigationController?.popViewController(animated: true)
+//                    self.dismiss(animated: true, completion: nil)
+                case .requestErr(let message):
+                    print("Request error: \(message)")
+                case .pathErr:
+                    print("Path error")
+                    
+                case .serverErr:
+                    print("Server error")
+                    
+                case .networkFail:
+                    print("Network failure")
+                    
+                default:
+                    break
+                }
+            }
+        }
+    }
+    func addBlock( nickname: String) {
+        if let token = self.keychain.get("accessToken") {
+            print("\(token)")
+            BoardAPI.shared.addBlock(token: token, nickname: nickname) { result in
                 switch result {
                 case .success:
                     print("delete success")

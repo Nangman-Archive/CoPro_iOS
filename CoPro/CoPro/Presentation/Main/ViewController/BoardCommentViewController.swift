@@ -9,7 +9,14 @@ import UIKit
 import KeychainSwift
 import SnapKit
 
-class BoardCommentViewController: UIViewController, UIGestureRecognizerDelegate {
+class BoardCommentViewController: BaseViewController, UIGestureRecognizerDelegate, ReportCommentDelegate {
+    func didTapConfirmButton() {
+        print("confirmButtonTapped")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.showAlert(title: nil, message: "감사합니다. 신고가 접수되었습니다. 24시간 이내 검토하고 이용규칙을 위반한 것으로 확인되면 콘텐츠가 삭제됩니다.", confirmButtonName: "확인" )
+        }
+    }
+    
     
     private lazy var tableView = UITableView()
     private let keychain = KeychainSwift()
@@ -22,6 +29,7 @@ class BoardCommentViewController: UIViewController, UIGestureRecognizerDelegate 
     var offset = 1
     var postId: Int?
     var commentId: Int?
+    var nickname: String?
     private let lineView1 = UIView()
 
 //    let shadowPath = UIBezierPath()
@@ -48,7 +56,7 @@ class BoardCommentViewController: UIViewController, UIGestureRecognizerDelegate 
         tableView.dataSource = self
     }
     
-    private func setUI() {
+    internal override func setUI() {
         self.view.backgroundColor = UIColor.systemBackground
         tableView.do {
             $0.showsVerticalScrollIndicator = false
@@ -100,7 +108,7 @@ class BoardCommentViewController: UIViewController, UIGestureRecognizerDelegate 
                            forCellReuseIdentifier: commentChildTableViewCell.identifier)
     }
     
-    private func setLayout() {
+    internal override func setLayout() {
         view.addSubviews(tableView, lineView1, bottomView)
         bottomView.addSubviews(commentTextField)
         bottomView.snp.makeConstraints {
@@ -257,6 +265,48 @@ extension BoardCommentViewController {
             }
         }
     }
+    
+    func presentblockConfirmationAlert() {
+        let alertController = UIAlertController(title: nil, message: "차단하시겠습니까?", preferredStyle: .alert)
+        
+        let deleteAction = UIAlertAction(title: "차단", style: .destructive) { _ in
+            self.addBlock(nickname: self.nickname ?? "")
+        }
+        alertController.addAction(deleteAction)
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func addBlock( nickname: String) {
+        if let token = self.keychain.get("accessToken") {
+            print("\(token)")
+            BoardAPI.shared.addBlock(token: token, nickname: nickname) { result in
+                switch result {
+                case .success:
+                    self.offset = 1
+                    self.comments.removeAll()
+                    self.filteredComments.removeAll()
+                    self.getAllComment(boardId: self.postId ?? 1, page: self.offset)
+                case .requestErr(let message):
+                    print("Request error: \(message)")
+                case .pathErr:
+                    print("Path error")
+                    
+                case .serverErr:
+                    print("Server error")
+                    
+                case .networkFail:
+                    print("Network failure")
+                    
+                default:
+                    break
+                }
+            }
+        }
+    }
     func deleteComment( boardId: Int) {
         if let token = self.keychain.get("accessToken") {
             print("\(token)")
@@ -346,10 +396,8 @@ extension BoardCommentViewController: UITableViewDelegate, UITableViewDataSource
             }
             cell.configureCell(comment)
             cell.delegate = self
-            let currentUserNickName = keychain.get("currentUserNickName")
-            if comment.comment.writer.nickName == currentUserNickName {
-                cell.configMenu()
-            }
+            cell.configMenu()
+            
             return cell
         }
         else {
@@ -358,10 +406,7 @@ extension BoardCommentViewController: UITableViewDelegate, UITableViewDataSource
             }
             cell.configureCell(comment)
             cell.delegate = self
-            let currentUserNickName = keychain.get("currentUserNickName")
-            if comment.comment.writer.nickName == currentUserNickName {
-                cell.configMenu()
-            }
+            cell.configMenu()
             return cell
         }
     }
@@ -429,15 +474,17 @@ extension BoardCommentViewController {
 }
 
 extension BoardCommentViewController: CustomCellDelegate {
-    func menuButtonTapped(commentId: Int, commentContent: String) {
+    func menuButtonTapped(nickname: String, commentId: Int, commentContent: String) {
         self.commentId = commentId
+        self.nickname = nickname
         var alert: UIAlertController
         if UIDevice.current.userInterfaceIdiom == .pad {
             alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
         } else {
             alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         }
-
+        let currentUserNickName = keychain.get("currentUserNickName")
+        if nickname == currentUserNickName {
             let action1 = UIAlertAction(title: "수정", style: .default) { _ in
                 let editCommentVC = editCommentViewController()
                 editCommentVC.commentId = commentId
@@ -451,10 +498,25 @@ extension BoardCommentViewController: CustomCellDelegate {
                 self.deleteComment(boardId: commentId)
             }
             let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-
-        alert.addAction(action1)
-        alert.addAction(action2)
-        alert.addAction(cancelAction)
+            alert.addAction(action1)
+            alert.addAction(action2)
+            alert.addAction(cancelAction)
+        }
+        else {
+            let action1 = UIAlertAction(title: "신고", style: .destructive) { _ in
+                let bottomSheetVC = ReportCommentBottomSheetViewController()
+                bottomSheetVC.postId = commentId
+                bottomSheetVC.delegate = self
+                self.getTopMostViewController()?.present(bottomSheetVC, animated: true, completion: nil)
+            }
+            let action2 = UIAlertAction(title: "차단", style: .default) { _ in
+                self.presentblockConfirmationAlert()
+            }
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            alert.addAction(action1)
+            alert.addAction(action2)
+            alert.addAction(cancelAction)
+        }
         getTopMostViewController()?.present(alert, animated: true, completion: nil)
     }
     func getTopMostViewController() -> UIViewController? {

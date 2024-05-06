@@ -12,7 +12,7 @@ import Then
 
 protocol CustomCellDelegate: AnyObject {
     func buttonTapped(commentId: Int)
-    func menuButtonTapped(commentId: Int, commentContent: String)
+    func menuButtonTapped(nickname: String, commentId: Int, commentContent: String)
 }
 final class commentTableViewCell: UITableViewCell, UICollectionViewDelegate {
     
@@ -45,8 +45,7 @@ final class commentTableViewCell: UITableViewCell, UICollectionViewDelegate {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        // menuButton을 숨기는 등의 초기화 코드 추가
-        menuButton.isHidden = true // 이 메서드는 실제 구현에 따라 다를 수 있습니다. 적절한 UI 초기화 코드로 대체하세요.
+       
     }
     
     // MARK: - UI Components Property
@@ -109,7 +108,7 @@ final class commentTableViewCell: UITableViewCell, UICollectionViewDelegate {
     }
     @objc func menubuttonTapped(_ sender: UIButton) {
         if let commentId = commentId {
-            delegate?.menuButtonTapped(commentId: commentId, commentContent: contentLabel.text ?? "")
+            delegate?.menuButtonTapped(nickname: nicknameLabel.text ?? "", commentId: commentId, commentContent: contentLabel.text ?? "")
         }
     }
 

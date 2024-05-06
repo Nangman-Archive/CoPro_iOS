@@ -33,7 +33,8 @@ enum BoardRouter {
     case addComment(token: String,boardId: Int, parentId: Int, contents: String)
     case editComment(token: String, boardId: Int, contents: String)
     case deleteComment(token: String,boardId: Int)
-
+    case addBlock(token: String, nickname: String)
+    case cancelBlock(token: String, nickname: String)
 }
 
 extension BoardRouter: BaseTargetType {
@@ -84,6 +85,10 @@ extension BoardRouter: BaseTargetType {
             return .put
         case .deleteComment:
             return .delete
+        case .addBlock:
+            return .post
+        case .cancelBlock:
+            return .post
         }
     }
     
@@ -131,6 +136,10 @@ extension BoardRouter: BaseTargetType {
             return "/api/comment/\(boardId)"
         case .deleteComment(_, let boardId):
             return "/api/comment/\(boardId)"
+        case .addBlock(_, _):
+            return "/api/add-blocked"
+        case .cancelBlock(_, _):
+            return "/api/cancel-blocked"
         }
     }
     var parameters: RequestParams {
@@ -207,6 +216,12 @@ extension BoardRouter: BaseTargetType {
             return .body(requesetModel)
         case .deleteComment:
             return .none
+        case .addBlock(_, let nickname):
+            let requestModel = blockRequestBody(blockedMemberNickName: nickname)
+            return .body(requestModel)
+        case .cancelBlock(_, let nickname):
+            let requestModel = blockRequestBody(blockedMemberNickName: nickname)
+            return .body(requestModel)
         }
     }
     
@@ -253,6 +268,10 @@ extension BoardRouter: BaseTargetType {
         case .editComment(let token, _, _):
             return ["Authorization": "Bearer \(token)"]
         case .deleteComment(let token, _):
+            return ["Authorization": "Bearer \(token)"]
+        case .addBlock(let token, _):
+            return ["Authorization": "Bearer \(token)"]
+        case .cancelBlock(let token, _):
             return ["Authorization": "Bearer \(token)"]
         }
     }
