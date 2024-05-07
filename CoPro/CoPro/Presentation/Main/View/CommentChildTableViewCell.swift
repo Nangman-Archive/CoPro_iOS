@@ -41,8 +41,6 @@ final class commentChildTableViewCell: UITableViewCell, UICollectionViewDelegate
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        // menuButton을 숨기는 등의 초기화 코드 추가
-        menuButton.isHidden = true // 이 메서드는 실제 구현에 따라 다를 수 있습니다. 적절한 UI 초기화 코드로 대체하세요.
     }
 
     
@@ -99,7 +97,7 @@ final class commentChildTableViewCell: UITableViewCell, UICollectionViewDelegate
     @objc func menubuttonTapped(_ sender: UIButton) {
         print("menu button tapped")
         if let commentId = commentId {
-            delegate?.menuButtonTapped(commentId: commentId, commentContent: contentLabel.text ?? "")
+            delegate?.menuButtonTapped(nickname: nicknameLabel.text ?? "", commentId: commentId, commentContent: contentLabel.text ?? "")
         }
     }
     

@@ -15,3 +15,11 @@ struct heartRequestBody: Codable {
         case boardID = "boardId"
     }
 }
+
+struct blockRequestBody: Codable {
+    let blockedMemberNickName: String
+
+    enum CodingKeys: String, CodingKey {
+        case blockedMemberNickName = "blockedMemberNickName"
+    }
+}

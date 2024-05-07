@@ -1,10 +1,9 @@
 //
-//  ReportBottomSheetViewController.swift
+//  File.swift
 //  CoPro
 //
-//  Created by 문인호 on 1/28/24.
+//  Created by 문인호 on 5/3/24.
 //
-
 
 import UIKit
 
@@ -12,10 +11,10 @@ import SnapKit
 import Then
 import KeychainSwift
 
-protocol ReportDelegate: AnyObject {
+protocol ReportCommentDelegate: AnyObject {
     func didTapConfirmButton()
 }
-final class ReportBottomSheetViewController: UIViewController {
+final class ReportCommentBottomSheetViewController: UIViewController {
 
     // MARK: - UI Components
     
@@ -27,7 +26,7 @@ final class ReportBottomSheetViewController: UIViewController {
     let textViewPlaceHolder = "신고내용을 입력해주세요"
     private let remainCountLabel = UILabel()
     private let keychain = KeychainSwift()
-    weak var delegate: ReportDelegate?
+    weak var delegate: ReportCommentDelegate?
 
     // MARK: - Properties
                     
@@ -45,7 +44,7 @@ final class ReportBottomSheetViewController: UIViewController {
     }
 }
 
-extension ReportBottomSheetViewController {
+extension ReportCommentBottomSheetViewController {
     
     // MARK: - UI Components Property
     
@@ -157,7 +156,7 @@ extension ReportBottomSheetViewController {
     }
 }
 
-extension ReportBottomSheetViewController: UITextViewDelegate {
+extension ReportCommentBottomSheetViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == textViewPlaceHolder {
             textView.text = nil

@@ -58,7 +58,8 @@ final class DetailBoardViewController: BaseViewController, UIGestureRecognizerDe
     private let tagStackView = UIStackView()
     private let chatButton = UIButton()
     private let contentStackView = UIStackView()
-    private var isMyPost: Bool = false
+    private var isMyPost = false
+    private var noUser = false
     private var category: String?
     private var imageUrl = [String]()
     private var imageId = [Int]()
@@ -432,12 +433,18 @@ final class DetailBoardViewController: BaseViewController, UIGestureRecognizerDe
         self.navigationItem.rightBarButtonItem = rightButton
     }
     @objc func rightButtonTapped() {
-    let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
+        var alertController: UIAlertController
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        } else {
+            alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        }
+        
         let action1 = UIAlertAction(title: "신고", style: .destructive) { _ in
             guard let boardId = self.postId else { return }
             let bottomSheetVC = ReportBottomSheetViewController()
             bottomSheetVC.postId = boardId
+            bottomSheetVC.delegate = self
             self.getTopMostViewController()?.present(bottomSheetVC, animated: true, completion: nil)
         }
         let action2 = UIAlertAction(title: "수정", style: .default) { _ in
@@ -447,11 +454,22 @@ final class DetailBoardViewController: BaseViewController, UIGestureRecognizerDe
             self.presentDeleteConfirmationAlert()
         }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        let action4 = UIAlertAction(title: "차단", style: .default) { _ in
+            self.presentblockConfirmationAlert()
+        }
 
-        alertController.addAction(action1)
         if self.isMyPost {
             alertController.addAction(action2)
             alertController.addAction(action3)
+        }
+        else {
+            if self.noUser {
+                alertController.addAction(action1)
+            }
+            else {
+                alertController.addAction(action1)
+                alertController.addAction(action4)
+            }
         }
         alertController.addAction(cancelAction)
 
@@ -474,6 +492,20 @@ func getTopMostViewController() -> UIViewController? {
             guard let postId = self.postId else { return }
             print("\(postId)")
             self.deletePost(boardId: postId)
+        }
+        alertController.addAction(deleteAction)
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func presentblockConfirmationAlert() {
+        let alertController = UIAlertController(title: nil, message: "차단하시겠습니까?", preferredStyle: .alert)
+        
+        let deleteAction = UIAlertAction(title: "차단", style: .destructive) { _ in
+            self.addBlock(nickname: self.nicknameLabel.text ?? "")
         }
         alertController.addAction(deleteAction)
         
@@ -521,11 +553,12 @@ func getTopMostViewController() -> UIViewController? {
                         if let validImageId = data.data.imageId {
                             self.imageId = validImageId
                         }
-                        let mappedItem = DetailBoardDataModel(boardId: data.data.boardId, title: data.data.title, createAt: data.data.createAt, category: data.data.category ?? "nil", contents: data.data.contents ?? "nil" , tag: data.data.tag ?? nil, count: data.data.count, heart: data.data.heart, imageUrl: data.data.imageUrl, nickName: data.data.nickName ?? "nil", occupation: data.data.occupation ?? "nil", isHeart: data.data.isHeart, isScrap: data.data.isScrap, commentCount: data.data.commentCount, part: data.data.part ?? "nil", email: data.data.email ?? "" , picture: data.data.picture ?? "")
+                        let mappedItem = DetailBoardDataModel(boardId: data.data.boardId, title: data.data.title, createAt: data.data.createAt, category: data.data.category ?? "", contents: data.data.contents ?? "" , tag: data.data.tag ?? "", count: data.data.count, heart: data.data.heart, imageUrl: data.data.imageUrl, nickName: data.data.nickName ?? "", occupation: data.data.occupation ?? "", isHeart: data.data.isHeart, isScrap: data.data.isScrap, commentCount: data.data.commentCount, part: data.data.part ?? "", email: data.data.email ?? "" , picture: data.data.picture ?? "")
                         self.isHeart = data.data.isHeart
                         self.isScrap = data.data.isScrap
                         self.imageUrl = data.data.imageUrl ?? []
                         self.isMyPost = data.data.email == self.keychain.get("currentUserEmail")
+                        self.noUser = data.data.email == nil
                         self.markdownView.load(markdown: data.data.contents ?? "")
                         if self.isMyPost {
                             self.chatButton.isHidden = true
@@ -692,6 +725,33 @@ func getTopMostViewController() -> UIViewController? {
         if let token = self.keychain.get("accessToken") {
             print("\(token)")
             BoardAPI.shared.deleteBoard(token: token, boardId: boardId) { result in
+                switch result {
+                case .success:
+                    print("delete success")
+                    self.delegate?.didDeletePost()
+                    self.navigationController?.popViewController(animated: true)
+//                    self.dismiss(animated: true, completion: nil)
+                case .requestErr(let message):
+                    print("Request error: \(message)")
+                case .pathErr:
+                    print("Path error")
+                    
+                case .serverErr:
+                    print("Server error")
+                    
+                case .networkFail:
+                    print("Network failure")
+                    
+                default:
+                    break
+                }
+            }
+        }
+    }
+    func addBlock( nickname: String) {
+        if let token = self.keychain.get("accessToken") {
+            print("\(token)")
+            BoardAPI.shared.addBlock(token: token, nickname: nickname) { result in
                 switch result {
                 case .success:
                     print("delete success")
@@ -1023,6 +1083,15 @@ extension DetailBoardViewController: editPostViewControllerDelegate {
                     break
                 }
             }
+        }
+    }
+}
+
+extension DetailBoardViewController: ReportDelegate {
+    func didTapConfirmButton() {
+        print("confirmButtonTapped")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.showAlert(title: nil, message: "감사합니다. 신고가 접수되었습니다. 24시간 이내 검토하고 이용규칙을 위반한 것으로 확인되면 콘텐츠가 삭제됩니다.", confirmButtonName: "확인" )
         }
     }
 }

@@ -245,6 +245,7 @@
 		E33379A72B4543920097ED0D /* recentSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33379A62B4543920097ED0D /* recentSearchTableViewCell.swift */; };
 		E33379A92B45439D0097ED0D /* popularSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33379A82B45439D0097ED0D /* popularSearchTableViewCell.swift */; };
 		E33379AB2B468D790097ED0D /* popularSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33379AA2B468D790097ED0D /* popularSearchCollectionViewCell.swift */; };
+		E33CC3942BE4DC0100A24346 /* ReportCommentBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33CC3932BE4DC0100A24346 /* ReportCommentBottomSheetViewController.swift */; };
 		E34B2BC72BA1DBC4000949EC /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = E34B2BC62BA1DBC4000949EC /* FloatingPanel */; };
 		E34B2BC92BA2A092000949EC /* MainFloatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34B2BC82BA2A092000949EC /* MainFloatingViewController.swift */; };
 		E363D5C22B5FA71700FE6A9C /* DetailBoardRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D5C12B5FA71700FE6A9C /* DetailBoardRequestBody.swift */; };
@@ -446,6 +447,7 @@
 		E33379A62B4543920097ED0D /* recentSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = recentSearchTableViewCell.swift; sourceTree = "<group>"; };
 		E33379A82B45439D0097ED0D /* popularSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popularSearchTableViewCell.swift; sourceTree = "<group>"; };
 		E33379AA2B468D790097ED0D /* popularSearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popularSearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		E33CC3932BE4DC0100A24346 /* ReportCommentBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCommentBottomSheetViewController.swift; sourceTree = "<group>"; };
 		E34B2BC82BA2A092000949EC /* MainFloatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFloatingViewController.swift; sourceTree = "<group>"; };
 		E363D5C12B5FA71700FE6A9C /* DetailBoardRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBoardRequestBody.swift; sourceTree = "<group>"; };
 		E363D5C32B60D8B100FE6A9C /* CommentDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDataModel.swift; sourceTree = "<group>"; };
@@ -1351,6 +1353,7 @@
 				E37B20982B72311600308158 /* BoardCommentViewController.swift */,
 				E3111E652B8C3BA300756886 /* editCommentViewController.swift */,
 				E3C64F962B65FCA6000BB5D6 /* ReportBottomSheetViewController.swift */,
+				E33CC3932BE4DC0100A24346 /* ReportCommentBottomSheetViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1622,6 +1625,7 @@
 				9E05D2CD2AD5097800F4CA43 /* Config.swift in Sources */,
 				9E98F2F12B4A49CE00A6756A /* MyProfileViewController.swift in Sources */,
 				E37AE7F02B3C25BD002ABDCD /* UISegmented++.swift in Sources */,
+				E33CC3942BE4DC0100A24346 /* ReportCommentBottomSheetViewController.swift in Sources */,
 				E32B67252B56783400EBB5AC /* DetailBoardDTO.swift in Sources */,
 				9E0B9CAD2B6BFAE400A5EACB /* WritebyMeDataModel.swift in Sources */,
 				B5D3E4F42AFB73B00021DDA0 /* LoginView.swift in Sources */,
@@ -1898,12 +1902,13 @@
 				GITHUB_CLIENT_ID = e0abaf8660ab93c1bfe3;
 				INFOPLIST_FILE = CoPro/Application/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라에 접근 가능하도록 허용 버튼을 눌러주세요.";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "접근을 허용하시겠습니까?";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진 앨범에 접근 가능하도록 허용 버튼을 눌러주세요.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "게시글 등록, 프로필 사진 수정을 위해 권한이 필요합니다. 허용 안함 시 일부 기능이 동작하지 않을 수 있습니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "게시글 등록, 프로필 사진 수정을 위해 권한이 필요합니다. 허용 안함 시 일부 기능이 동작하지 않을 수 있습니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1931,12 +1936,13 @@
 				GITHUB_CLIENT_ID = e0abaf8660ab93c1bfe3;
 				INFOPLIST_FILE = CoPro/Application/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라에 접근 가능하도록 허용 버튼을 눌러주세요.";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "접근을 허용하시겠습니까?";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진 앨범에 접근 가능하도록 허용 버튼을 눌러주세요.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "게시글 등록, 프로필 사진 수정을 위해 권한이 필요합니다. 허용 안함 시 일부 기능이 동작하지 않을 수 있습니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "게시글 등록, 프로필 사진 수정을 위해 권한이 필요합니다. 허용 안함 시 일부 기능이 동작하지 않을 수 있습니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
