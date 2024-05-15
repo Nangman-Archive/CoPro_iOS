@@ -58,7 +58,7 @@ class LoginView: BaseView {
         addSubview(coproLogo)
         addSubview(googleSignInButton)
         addSubview(appleSignInButton)
-        addSubview(githubSignInButton)
+//        addSubview(githubSignInButton)
         addSubview(signOutButton)
         //Copro Label Design
         addSubview(coproLogoLabel)
@@ -72,8 +72,8 @@ class LoginView: BaseView {
         googleLogoBackGround.addSubview(googleLogo)
         googleSignInButton.addSubview(googleSignInTitle)
         //GitHubSignInButton
-        githubSignInButton.addSubview(githubLogo)
-        githubSignInButton.addSubview(githubSignInTitle)
+//        githubSignInButton.addSubview(githubLogo)
+//        githubSignInButton.addSubview(githubSignInTitle)
 
         
     }
@@ -138,27 +138,27 @@ class LoginView: BaseView {
         }
         googleSignInButton.backgroundColor = UIColor(red: 0.25, green: 0.52, blue: 0.95, alpha: 1.0)
         googleSignInButton.layer.cornerRadius = 12
-        githubLogo.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().offset(24)
-            $0.width.height.equalTo(20)
-        }
-        //        githubLogo.backgroundColor = .white
-        githubLogo.layer.cornerRadius = 10
-        githubLogo.clipsToBounds = true
-        
-        githubSignInTitle.snp.makeConstraints {
-            $0.centerX.centerY.equalToSuperview()
-        }
-        githubSignInButton.snp.makeConstraints {
-            $0.centerX.equalTo(self.safeAreaLayoutGuide.snp.centerX)
-            $0.top.equalTo(googleSignInButton.snp.bottom).offset(20)
-            $0.leading.equalTo(self.safeAreaLayoutGuide.snp.leading).offset(20)
-            $0.trailing.equalTo(self.safeAreaLayoutGuide.snp.trailing).offset(-20)
-            $0.height.equalTo(48)
-        }
-        githubSignInButton.backgroundColor = UIColor.black
-        githubSignInButton.layer.cornerRadius = 12
+//        githubLogo.snp.makeConstraints {
+//            $0.centerY.equalToSuperview()
+//            $0.leading.equalToSuperview().offset(24)
+//            $0.width.height.equalTo(20)
+//        }
+//        //        githubLogo.backgroundColor = .white
+//        githubLogo.layer.cornerRadius = 10
+//        githubLogo.clipsToBounds = true
+//        
+//        githubSignInTitle.snp.makeConstraints {
+//            $0.centerX.centerY.equalToSuperview()
+//        }
+//        githubSignInButton.snp.makeConstraints {
+//            $0.centerX.equalTo(self.safeAreaLayoutGuide.snp.centerX)
+//            $0.top.equalTo(googleSignInButton.snp.bottom).offset(20)
+//            $0.leading.equalTo(self.safeAreaLayoutGuide.snp.leading).offset(20)
+//            $0.trailing.equalTo(self.safeAreaLayoutGuide.snp.trailing).offset(-20)
+//            $0.height.equalTo(48)
+//        }
+//        githubSignInButton.backgroundColor = UIColor.black
+//        githubSignInButton.layer.cornerRadius = 12
         
     }
     

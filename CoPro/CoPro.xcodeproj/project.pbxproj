@@ -111,6 +111,9 @@
 		9E5C369D2B8390D40091884C /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5C369C2B8390D40091884C /* NotificationAPI.swift */; };
 		9E5C369F2B83F1A40091884C /* ChattingNotificationRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5C369E2B83F1A30091884C /* ChattingNotificationRequestBody.swift */; };
 		9E5C36A12B847D370091884C /* ChattingNotificationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5C36A02B847D370091884C /* ChattingNotificationDTO.swift */; };
+		9E659FF22BF195E6004B9297 /* BlockedDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E659FF12BF195E6004B9297 /* BlockedDTO.swift */; };
+		9E659FF42BF19F5A004B9297 /* BlockedDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E659FF32BF19F59004B9297 /* BlockedDataModel.swift */; };
+		9E659FF62BF1A273004B9297 /* BlockedUserListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E659FF52BF1A273004B9297 /* BlockedUserListTableViewCell.swift */; };
 		9E7401C02B3BE1C80030C8EC /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9E7401BF2B3BE1C80030C8EC /* MessageKit */; };
 		9E7401C62B3BF48D0030C8EC /* NSObject++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7401C52B3BF48D0030C8EC /* NSObject++.swift */; };
 		9E7401C82B3BF4B80030C8EC /* UIImage++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7401C72B3BF4B80030C8EC /* UIImage++.swift */; };
@@ -349,6 +352,9 @@
 		9E5C369C2B8390D40091884C /* NotificationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAPI.swift; sourceTree = "<group>"; };
 		9E5C369E2B83F1A30091884C /* ChattingNotificationRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingNotificationRequestBody.swift; sourceTree = "<group>"; };
 		9E5C36A02B847D370091884C /* ChattingNotificationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingNotificationDTO.swift; sourceTree = "<group>"; };
+		9E659FF12BF195E6004B9297 /* BlockedDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedDTO.swift; sourceTree = "<group>"; };
+		9E659FF32BF19F59004B9297 /* BlockedDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedDataModel.swift; sourceTree = "<group>"; };
+		9E659FF52BF1A273004B9297 /* BlockedUserListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUserListTableViewCell.swift; sourceTree = "<group>"; };
 		9E7401C52B3BF48D0030C8EC /* NSObject++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject++.swift"; sourceTree = "<group>"; };
 		9E7401C72B3BF4B80030C8EC /* UIImage++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage++.swift"; sourceTree = "<group>"; };
 		9E7401CA2B3BF5670030C8EC /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
@@ -950,6 +956,7 @@
 				B5F1C26B2B820A6500791595 /* LikeProfileDTO.swift */,
 				9E51EBA42BA9A309001750C2 /* DeleteProfilePhoto.swift */,
 				9E51EBA62BA9A86D001750C2 /* AddProfilePhoto.swift */,
+				9E659FF12BF195E6004B9297 /* BlockedDTO.swift */,
 			);
 			path = MyProfile;
 			sourceTree = "<group>";
@@ -990,6 +997,7 @@
 				9E0B9CB02B6C336C00A5EACB /* MyCommentsTableViewCell.swift */,
 				9E98F2F62B4FC64600A6756A /* CardTypeSettingsTableViewCell.swift */,
 				B5EAD5A62B8F8AB90030F2DD /* MemberStatusTableViewCell.swift */,
+				9E659FF52BF1A273004B9297 /* BlockedUserListTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1013,6 +1021,7 @@
 				9E0B9CAC2B6BFAE400A5EACB /* WritebyMeDataModel.swift */,
 				9E0B9CBA2B6DC74200A5EACB /* ScrapPostDataModel.swift */,
 				9E0B9CB42B6C365700A5EACB /* MyWrittenCommentDataModel.swift */,
+				9E659FF32BF19F59004B9297 /* BlockedDataModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1708,6 +1717,7 @@
 				9E0B9CAF2B6C2DE100A5EACB /* RelatedPostsToMeTavleViewCell.swift in Sources */,
 				9E0B9CAB2B6B466B00A5EACB /* MyContributionsViewController.swift in Sources */,
 				E37D36632B8CB52200FFEF57 /* EditPostViewController.swift in Sources */,
+				9E659FF42BF19F5A004B9297 /* BlockedDataModel.swift in Sources */,
 				9E7401CD2B3C0FB50030C8EC /* BaseNavigationController.swift in Sources */,
 				9E05D2EA2AD521CB00F4CA43 /* Font.swift in Sources */,
 				E3D6D1562AEFACA3003269FF /* URLConst.swift in Sources */,
@@ -1735,6 +1745,7 @@
 				E314AD172B5CD98100BDB6AD /* CommentTableViewCell.swift in Sources */,
 				E37B209B2B7252C900308158 /* CommentDTO.swift in Sources */,
 				9E05D2FA2AD5227500F4CA43 /* UIColor++.swift in Sources */,
+				9E659FF22BF195E6004B9297 /* BlockedDTO.swift in Sources */,
 				B5F1C26A2B82009100791595 /* LikeProfileViewController.swift in Sources */,
 				B58B8D332B4D3E2100FB98F9 /* CardAPI.swift in Sources */,
 				9E05D2EE2AD5221500F4CA43 /* UIView++.swift in Sources */,
@@ -1748,6 +1759,7 @@
 				9E51EBA32BA7F5A8001750C2 /* DeleteAccountDTO.swift in Sources */,
 				9E8FB6F52B5CF64A00C02028 /* MyProfileAPI.swift in Sources */,
 				9E5C361A2B7F8F340091884C /* CheckInitialLoginDTO.swift in Sources */,
+				9E659FF62BF1A273004B9297 /* BlockedUserListTableViewCell.swift in Sources */,
 				E3D6D1582AEFACB6003269FF /* NetworkResult.swift in Sources */,
 				E36717AB2B70A2B800CBCD8B /* PhotoViewController.swift in Sources */,
 			);
