@@ -1523,7 +1523,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					9E05D2A92AD508B200F4CA43 = {
 						CreatedOnToolsVersion = 15.0;
@@ -1603,7 +1603,6 @@
 				9E5C369F2B83F1A40091884C /* ChattingNotificationRequestBody.swift in Sources */,
 				E34B2BC92BA2A092000949EC /* MainFloatingViewController.swift in Sources */,
 				E37AE7FE2B3C27B1002ABDCD /* recruitViewController.swift in Sources */,
-				E314AD192B5E735300BDB6AD /* DetailBoardDataModel.swift in Sources */,
 				E314AD192B5E735300BDB6AD /* DetailBoardDataModel.swift in Sources */,
 				9E7462DB2B756899006693B6 /* EditMyProfileDTO.swift in Sources */,
 				9E05D2B22AD508B200F4CA43 /* BaseViewController.swift in Sources */,
@@ -1715,7 +1714,6 @@
 				E3FCFC0D2B90ACF400D47B7E /* DetailPhotoCollectionViewCell.swift in Sources */,
 				E32B67212B566CF600EBB5AC /* BoardDTO.swift in Sources */,
 				B5F1C2742B864C9D00791595 /* NotificationListViewController.swift in Sources */,
-				9E05D2D32AD5099E00F4CA43 /* BaseResponse.swift in Sources */,
 				E3E2B8432B7F9B040022E5D0 /* noticeViewController.swift in Sources */,
 				E32B673C2B56AD6700EBB5AC /* CreateBoardRequestBody.swift in Sources */,
 				9E0B9CAF2B6C2DE100A5EACB /* RelatedPostsToMeTavleViewCell.swift in Sources */,
