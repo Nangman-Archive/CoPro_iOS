@@ -502,7 +502,7 @@ func getTopMostViewController() -> UIViewController? {
     }
     
     func presentblockConfirmationAlert() {
-        let alertController = UIAlertController(title: nil, message: "차단하시겠습니까?", preferredStyle: .alert)
+        let alertController = UIAlertController(title: nil, message: "차단하시겠습니까?\n 차단시 해당 유저의 활동을 볼 수 없습니다.", preferredStyle: .alert)
         
         let deleteAction = UIAlertAction(title: "차단", style: .destructive) { _ in
             self.addBlock(nickname: self.nicknameLabel.text ?? "")
@@ -755,9 +755,15 @@ func getTopMostViewController() -> UIViewController? {
                 switch result {
                 case .success:
                     print("delete success")
-                    self.delegate?.didDeletePost()
-                    self.navigationController?.popViewController(animated: true)
-//                    self.dismiss(animated: true, completion: nil)
+                   DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                       self.showAlert(title: "신고가 접수되었습니다.",
+                                      message: "검토는 최대 24시간이 소요됩니다.",
+                                      confirmButtonName: "확인",
+                                      confirmButtonCompletion: { [self] in
+                          self.delegate?.didDeletePost()
+                          self.navigationController?.popViewController(animated: true)
+                       })
+                   }
                 case .requestErr(let message):
                     print("Request error: \(message)")
                 case .pathErr:
