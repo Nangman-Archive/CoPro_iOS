@@ -157,7 +157,7 @@ class MyProfileViewController: BaseViewController, UITableViewDataSource, UITabl
       switch indexPath.row {
       case 0:
          return .profile
-      case 10:
+      case 10, 12:
          return .cardChange
       case 11:
          return .logout
@@ -181,7 +181,7 @@ class MyProfileViewController: BaseViewController, UITableViewDataSource, UITabl
    
    //불러올 테이블 셀 개수
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return 12
+      return 13
    }
    
    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -210,6 +210,16 @@ class MyProfileViewController: BaseViewController, UITableViewDataSource, UITabl
          let cell = tableView.dequeueReusableCell(withIdentifier: "CardTypeSettingsTableViewCell", for: indexPath) as! CardTypeSettingsTableViewCell
          cell.delegate = self
          cell.selectionStyle = .none
+         switch indexPath.row {
+         case 10:
+            print("")
+         case 12:
+            cell.titleLabel.setPretendardFont(text: "문의", size: 17, weight: .bold, letterSpacing: 1.25)
+            cell.subTitleLabel.setPretendardFont(text: "nangman0107@gmail.com", size: 13, weight: .regular, letterSpacing: 1.25)
+            cell.greaterthanContainer.isHidden = true
+         default:
+            break
+         }
          return cell
          
       case .myTrace:

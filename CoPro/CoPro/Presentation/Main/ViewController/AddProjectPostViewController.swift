@@ -32,7 +32,7 @@ class AddProjectPostViewController: UIViewController {
     private let lineView2 = UIView()
     private var imageUrls = [Int]()
     private var deleteImages = [Int]()
-    let textViewPlaceHolder = "내용을 입력하세요"
+    let textViewPlaceHolder = "부적절하거나 불쾌감을 줄 수 있는 컨텐츠는 제재를 받을 수 있습니다."
     private let warnView = UIView()
     lazy var remainCountLabel = UILabel()
     private let warnLabel = UILabel()
@@ -181,7 +181,7 @@ class AddProjectPostViewController: UIViewController {
             $0.textContainerInset = UIEdgeInsets(top: 16.0, left: 0, bottom: 16.0, right: 0)
             $0.font = .pretendard(size: 17, weight: .regular)
             $0.text = textViewPlaceHolder
-            $0.textColor = .Black()
+            $0.textColor = .gray
             $0.delegate = self
             $0.isScrollEnabled = false
             $0.sizeToFit()
