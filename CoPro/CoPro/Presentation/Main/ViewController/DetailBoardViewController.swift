@@ -936,7 +936,7 @@ func getTopMostViewController() -> UIViewController? {
                    let window = delegate.window {
                    window.rootViewController = bottomTabController
                    window.makeKeyAndVisible()
-                   bottomTabController.selectedIndex = 3
+                   bottomTabController.selectedIndex = 2
                 }
              })
           }
@@ -953,7 +953,7 @@ func getTopMostViewController() -> UIViewController? {
                    let window = delegate.window {
                    window.rootViewController = bottomTabController
                    window.makeKeyAndVisible()
-                   bottomTabController.selectedIndex = 3
+                   bottomTabController.selectedIndex = 2
                 }
              })
           }

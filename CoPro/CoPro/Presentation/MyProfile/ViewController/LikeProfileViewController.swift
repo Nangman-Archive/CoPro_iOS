@@ -46,7 +46,7 @@ class LikeProfileViewController:UIViewController, UICollectionViewDataSource, UI
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let window = windowScene.windows.first,
            let tabBarController = window.rootViewController as? BottomTabController {
-            tabBarController.selectedIndex = 3
+            tabBarController.selectedIndex = 2
         }
         DispatchQueue.main.async {
             if success {
